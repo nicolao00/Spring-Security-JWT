@@ -38,6 +38,7 @@ public class JWTUtil {
 
     public String createJwt(String username, String role, Long expiredMs) {
 
+        // 어떤 인자를 넣을지는 Claim에 넣어줌 (키, 값)
         Claims claims = Jwts.claims();
         claims.put("username", username);
         claims.put("role", role);
