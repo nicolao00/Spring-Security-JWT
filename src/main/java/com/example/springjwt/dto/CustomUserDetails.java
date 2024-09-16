@@ -17,14 +17,17 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collection = new ArrayList<>();
-        collection.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return userEntity.getRole();
-            }
-        });
 
-        return null;
+
+//        collection.add(new GrantedAuthority() {
+//            @Override
+//            public String getAuthority() {
+//                return userEntity.getRole();
+//            }
+//        }); getAuthority() 함수를 넣기위해  new GrantedAuthority로 감싸준 것인데 아래처럼 람다로 쉽게 바꿔쓰자.
+        collection.add((GrantedAuthority) () -> userEntity.getRole());
+
+        return collection;
     }
 
     @Override
